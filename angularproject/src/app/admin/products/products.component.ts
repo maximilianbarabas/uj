@@ -106,9 +106,21 @@ fd.append('description',$("#description").val());
   }
   SelectForDelete(id: any)
   {
+    this.tempID=id;
   }
   deleteConform()
   {
+    var message;
+    this.proser.delete(this.tempID).subscribe (
+      res=>{
+        message=res;
+        Toast.fire({
+          type:"success",
+          title:message});
+          this.proser.getFromDb("");
+        },
+    error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
+    });
 
   }
 

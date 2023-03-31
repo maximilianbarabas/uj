@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\product;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -77,6 +78,9 @@ class ProductController extends Controller
                 return response()->json(['error'=>$validator->errors()->all()], status: 409);
             }
             $p=product::find($request->id)->delete();
+                Storage::disk('public')->delete($p->image);
+
+                $p->delete();
 
                 
             return response()->json(['message'=>"Product Successfully Deleted"]);
