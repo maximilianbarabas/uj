@@ -60,7 +60,7 @@ class ProductController extends Controller
         $p->category=$request->category;
         $p->brand=$request->brand;
         $p->description=$request->description;
-        $p->price=$request->image;
+        $p->price=$request->price;
         $p->save();
             
             return response()->json(['message'=>"Product Successfully Updated"]);
