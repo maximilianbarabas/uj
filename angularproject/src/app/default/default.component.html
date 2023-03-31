@@ -1,1 +1,16 @@
-<router-outlet></router-outlet>
+<div class="container-fluid">
+    <!--Top Home page bar -->
+    <div class="row">
+
+    </div>
+
+    <div class="row">
+        <!--letf sidebar -->
+        <div class="col-md-2"><app-dleftsidebar></app-dleftsidebar></div>
+        <!--MAIN CONTAINER -->
+        <div class="col-md-7"><router-outlet></router-outlet></div>
+        <!--Right sidebar registration-->
+        <div class="col-md-3"><app-dregistration></app-dregistration></div>
+    </div>
+
+</div>

@@ -6,5 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dregistration.component.css']
 })
 export class DregistrationComponent {
+  constructor() {}
+
+  ngOnInit(): void {
+    
+  }
 
 }
