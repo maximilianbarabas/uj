@@ -61,7 +61,7 @@
                     <td>{{p.price}}</td>
                     <td>{{p.description |slice:0:20}}</td>
                     <td><button type="button" class="btn btn-default btn-sm"><i class="fas fa-trash"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i (click)="selecttForUpdate()" data-toggle="modal" data-target="#AddModal"class="fas fa-edit"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i (Onclick)="selectForUpdate(p.id)" data-toggle="modal" data-target="#UpdateModal"class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></button>
 
 
