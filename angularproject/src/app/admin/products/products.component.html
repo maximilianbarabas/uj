@@ -62,7 +62,7 @@
                     <td>{{p.description |slice:0:20}}</td>
                     <td><button type="button" class="btn btn-default btn-sm"><i (click)="SelectForDelete(p.id)" data-toggle="modal" data-target="#DeleteModal"class="fas fa-trash"></i></button>
                         <button type="button" class="btn btn-default btn-sm"><i (click)="selectForUpdate(p.id)" data-toggle="modal" data-target="#UpdateModal"class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i (click)="selectForShow(p.id)" data-toggle="modal" data-target="Show#Modal" class="fas fa-eye"></i></button>
 
 
 
@@ -214,22 +214,87 @@
     </div>
   </div>
 
-    <!--  Modal for Delete product -->
-    <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!--  Modal for Delete product -->
+  <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <h2>Are you sure you want delete this product?</h2>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (Onclick)="deleteConform()">Delete Product</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <!--  Modal for show product -->
+    <div class="modal fade" id="ShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h5>
+            <h5 class="modal-title fs-5" id="exampleModalLabel">Product Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <h2>Are you sure you want delete this product?</h2>
+              <div class ="container-fluid">
+                  <div class="row">
+                      <div class="col-md-3">
+                          <img class = "img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" src="./assets/1.png"alt=""></div>
+                      <div class="col-md-9">
+                        </div>
+                  </div><br>
+                  <label>Name : </label>
+                  <div class="row"><input disabled id="sname" class="form-control"></div>
+                  <div class="row">
+                      <div class="col">
+                        
+                        <label>Category</label>
+                        <select disabled class="form-control" id="scategory">
+                            <option id="soldcategory" value="Show"></option>
+                          <option value="Shoes">Cipők</option>
+                          <option value="Watch">Órák</option>
+                          <option value="Watch">Órák</option>
+                          <option value="Watch">Órák</option>
+                          <option value="Watch">Órák</option>
+                          <option value="Watch">Órák</option>
+                          <option value="Watch">Órák</option>
+                      </select></div>
+                      <div class="col">
 
+                        <label>Brands</label>
+                      <select disabled class ="form-control" id="sbrand">
+                          <option id="oldbrand" value="Edit"></option>
+                          <option value="Adidas">Adidas</option>
+                          <option value="Nike.">Nike.</option>
+                          <option value="Puma.">Puma.</option>
+                          <option value="Kappa.">Kappa.</option>
+                      </select>
+                      </div>
+  
+                      <div class="col">
+                      <label>Price</label>
+                      <input disabled type="number" id="sprice" class="form-control"></div>
+                  </div>
+                  <div class="row">
+                      <label>Description</label>
+                      <textarea disabled id="sdescription" class="form-control" style="height: 100px;">
+  
+                      </textarea>
+                  </div>
+          </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (Onclick)="deleteConform()">Delete Product</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
+
           </div>
         </div>
       </div>
     </div>
+

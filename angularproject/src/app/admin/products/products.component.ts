@@ -81,9 +81,27 @@ fd.append('description',$("#description").val());
         $("#description").prop("value",el.description)
       }
     })
+    }
+
+    selectForShow(id:any)
+    {
+      this.tempID=(id)
+      this.products.forEach(el=> {
+        if(id==el.id)
+        {
+          $("#sname").prop("value",el.name)
+          $("#sodcategory").html(el.category)
+          $("#soldcategory").prop("value",el.category)
+          $("#soldbrand").html("value",el.brand)
+          $("#soldbrand").prop("value",el.brand)
+          $("#sprice").prop("value",el.price)
+          $("#sdescription").prop("value",el.description)
+        }
+      })
+  
+  
   }
   update()
-
   {
     var message;
     const fd=new FormData();
@@ -125,3 +143,7 @@ fd.append('description',$("#description").val());
   }
 
 }
+function selectForShow(id: any, any: any) {
+  throw new Error('Function not implemented.');
+}
+
