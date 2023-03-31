@@ -79,6 +79,7 @@ fd.append('description',$("#description").val());
         $("#oldbrand").html("value",el.brand)
         $("#price").prop("value",el.price)
         $("#description").prop("value",el.description)
+        $("#ShowImage").fadeIn("fast").attr('src',el.imgpath);
       }
     })
     }
