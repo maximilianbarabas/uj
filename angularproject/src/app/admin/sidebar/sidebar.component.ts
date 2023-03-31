@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent {
+name="";
+  constructor() {}
+
+  ngOnInit(): void {
+    this.name="Halhatatlan Zsoldos";
+  }
 
 }

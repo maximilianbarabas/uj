@@ -79,7 +79,7 @@ fd.append('description',$("#description").val());
         $("#oldbrand").html("value",el.brand)
         $("#price").prop("value",el.price)
         $("#description").prop("value",el.description)
-        $("#ShowImage").fadeIn("fast").attr('src',el.imgpath);
+        $("#UpdateImage").fadeIn("fast").attr('src',el.imgpath);
       }
     })
     }
@@ -97,6 +97,8 @@ fd.append('description',$("#description").val());
           $("#soldbrand").prop("value",el.brand)
           $("#sprice").prop("value",el.price)
           $("#sdescription").prop("value",el.description)
+          $("#ShowImage").fadeIn("fast").attr('src',el.imgpath);
+
         }
       })
   
