@@ -67,7 +67,7 @@ class ProductController extends Controller
 
 
     }
-        public function delete(Request $request)
+        public function delete(Request $request) 
         {
             $validator=Validator::make($request->all(),[
                 'id'=>'required',

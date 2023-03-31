@@ -60,8 +60,8 @@
                     <td>{{p.brand}}</td>
                     <td>{{p.price}}</td>
                     <td>{{p.description |slice:0:20}}</td>
-                    <td><button type="button" class="btn btn-default btn-sm"><i class="fas fa-trash"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i (Onclick)="selectForUpdate(p.id)" data-toggle="modal" data-target="#UpdateModal"class="fas fa-edit"></i></button>
+                    <td><button type="button" class="btn btn-default btn-sm"><i (click)="SelectForDelete(p.id)" data-toggle="modal" data-target="#DeleteModal"class="fas fa-trash"></i></button>
+                        <button type="button" class="btn btn-default btn-sm"><i (click)="selectForUpdate(p.id)" data-toggle="modal" data-target="#UpdateModal"class="fas fa-edit"></i></button>
                         <button type="button" class="btn btn-default btn-sm"><i class="fas fa-eye"></i></button>
 
 
@@ -152,11 +152,13 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" (Onclick)="add()">Add Product</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (Onclick)="add()">Add Product</button>
         </div>
       </div>
     </div>
   </div>
+
+
   <!--  Modal for update product -->
   <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -179,16 +181,16 @@
                     <div class="col">
                       <label>Category</label>
                       <select class="form-control" id="uncategory">
-                          <option id="oldcategory" value="Previous"></option>
+                          <option id="oldcategory" value="Edit"></option>
                         <option value="Shoes">Cipők</option>
                         <option value="Watch">Órák</option>
                     </select></div>
                     <div class="col">
                       <label>Brands</label>
                     <select class ="form-control" id="brand">
-                        <option id="oldbrand" value="Previous"></option>
-                        <option value="Update">Update</option>
-                        <option value="J.">J.</option>
+                        <option id="oldbrand" value="Edit"></option>
+                        <option value="Adidas">Adidas</option>
+                        <option value="Nike.">Nike.</option>
                     </select>
                     </div>
 
@@ -206,8 +208,28 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" (Onclick)="update">update Product</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (Onclick)="update">update Product</button>
         </div>
       </div>
     </div>
   </div>
+
+    <!--  Modal for Delete product -->
+    <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <h2>Are you sure you want delete this product?</h2>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (Onclick)="deleteConform()">Delete Product</button>
+          </div>
+        </div>
+      </div>
+    </div>

@@ -103,6 +103,13 @@ fd.append('description',$("#description").val());
             },
         error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
         });
+  }
+  SelectForDelete(id: any)
+  {
+  }
+  deleteConform()
+  {
 
-}
+  }
+
 }
