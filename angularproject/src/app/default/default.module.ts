@@ -8,6 +8,7 @@ import { DleftsidebarComponent } from './dleftsidebar/dleftsidebar.component';
 import { DrightsidebarComponent } from './drightsidebar/drightsidebar.component';
 import { DregistrationComponent } from './dregistration/dregistration.component';
 import { DloginComponent } from './dlogin/dlogin.component';
+import { DtopbarComponent } from './dtopbar/dtopbar.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { DloginComponent } from './dlogin/dlogin.component';
     DleftsidebarComponent,
     DrightsidebarComponent,
     DregistrationComponent,
-    DloginComponent
+    DloginComponent,
+    DtopbarComponent
   ],
   imports: [
     CommonModule,
