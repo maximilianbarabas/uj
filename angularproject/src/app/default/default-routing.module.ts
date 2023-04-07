@@ -1,3 +1,5 @@
+import { ContactusComponent } from './contactus/contactus.component';
+import { AboutComponent } from './about/about.component';
 import { DproductsComponent } from './dproducts/dproducts.component';
 import { DefaultComponent } from './default.component';
 import { NgModule } from '@angular/core';
@@ -7,7 +9,9 @@ const routes: Routes = [
   {path:'',component:DefaultComponent,
   children:[
     {path:'',component:DproductsComponent},
-    {path:'products',component:DproductsComponent}
+    {path:'products',component:DproductsComponent},
+    {path:'contactus',component:ContactusComponent},
+    {path:'about',component:AboutComponent}
 
   ]}
 ];
