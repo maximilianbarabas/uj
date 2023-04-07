@@ -9,6 +9,8 @@ import { DrightsidebarComponent } from './drightsidebar/drightsidebar.component'
 import { DregistrationComponent } from './dregistration/dregistration.component';
 import { DloginComponent } from './dlogin/dlogin.component';
 import { DtopbarComponent } from './dtopbar/dtopbar.component';
+import { AboutComponent } from './about/about.component';
+import { ContactusComponent } from './contactus/contactus.component';
 
 
 @NgModule({
@@ -19,7 +21,9 @@ import { DtopbarComponent } from './dtopbar/dtopbar.component';
     DrightsidebarComponent,
     DregistrationComponent,
     DloginComponent,
-    DtopbarComponent
+    DtopbarComponent,
+    AboutComponent,
+    ContactusComponent
   ],
   imports: [
     CommonModule,
