@@ -21,19 +21,9 @@ export class DloginComponent {
 
       var message;
       const fd=new FormData();
-      fd.append('email',$("#email").val());
-      fd.append('password',$("#pass").val());
-          this.userSer.register("fd").subscribe (
-            res=>{
-              message=res;
-              Toast.fire({
-                type:"success",
-                title:"Successfully Logged"
-                  });
-              },
-          error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
-          });
-
-  }
+      fd.append('email',$("#lemail").val());
+      fd.append('password',$("#lpass").val());
+          this.userSer.login("fd")
+          };
 
 }

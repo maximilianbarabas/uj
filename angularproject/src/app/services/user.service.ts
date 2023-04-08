@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+declare var $: any
+declare var toastr: any;
+declare var Toast: any;
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -14,8 +19,8 @@ export class UserService {
       var r:any =res;
 
       localStorage.setItem('user', r.user)
-
-    })
+      toastr.success("Success", "Successfully Logged");
+    },error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element)})});
 
   }
   public register(form: string)
