@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./default.component.css']
 })
 export class DefaultComponent {
+
+  constructor(private router:Router) {
+    if(localStorage.getItem('user'))
+    {
+      this.router.navigateByUrl('admin/products');
+
+    }
+  }
+
+  ngOnInit(): void {
+
+  }
 
 }

@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { UserService } from './../../services/user.service';
 import { Component } from '@angular/core';
 
@@ -12,7 +13,7 @@ declare var Toast: any;
 })
 export class DloginComponent {
 
-  constructor(private userSer:UserService) {}
+  constructor(private userSer:UserService, private router:Router) {}
 
   ngOnInit(): void{
     
@@ -24,6 +25,7 @@ export class DloginComponent {
       fd.append('email',$("#lemail").val());
       fd.append('password',$("#lpass").val());
           this.userSer.login("fd")
+          this.router.navigateByUrl('admin/products');
           };
 
 }

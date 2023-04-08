@@ -18,7 +18,7 @@ export class UserService {
     return this.http.post(this.baseUrl+"login",null).subscribe(res=>{
       var r:any =res;
 
-      localStorage.setItem('user', r.user)
+      localStorage.setItem('user',JSON.stringify(r.user))
       toastr.success("Success", "Successfully Logged");
     },error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element)})});
 
