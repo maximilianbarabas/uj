@@ -15,7 +15,7 @@ export class UserService {
   private baseUrl = "http://localhost:8000/api/";
   public login(form: string)
   {
-    return this.http.post(this.baseUrl+"login",null).subscribe(res=>{
+    return this.http.post(this.baseUrl+"login",form).subscribe(res=>{
       var r:any =res;
 
       localStorage.setItem('user',JSON.stringify(r.user))
