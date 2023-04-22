@@ -1,0 +1,3 @@
+[submodule "javaproject"]
+	path = javaproject
+	url = https://github.com/KendeAndras/javaproject.git
