@@ -29,6 +29,13 @@ Register button doesnt work
 
 Add products button doent work 
 
-..
+...
+
+From angular.json to 
+
+              // "./src/assets/AdminLTE/dist/myjs_Toast.js",
+
+              // "./node_modules/bootsrap/dist/js/bootstrap.min.js",
+
 
 
