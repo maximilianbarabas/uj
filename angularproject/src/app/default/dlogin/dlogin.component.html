@@ -1,11 +1,18 @@
-<div class="form-group">
-<label for="email">E-mail address</label>
-<input type="email" class="form-control" id="lemail" placeholder="Enter E-mail address">
+<div class="card">
+  <div class="card-body">
+    <div class="form-group">
+      <label for="lemail">E-mail address</label>
+      <input type="email" class="form-control" id="lemail" placeholder="Enter E-mail address">
+    </div>
+    <div class="form-group">
+      <label for="lpass">Password</label>
+      <input type="password" class="form-control" id="lpass" placeholder="Enter Password">
+    </div>
+
+  </div>
+  <div class="card-footer">
+    <button type="button" class="btn btn-secondary" (click)="hide()">Cancel</button>
+    <button (click)="login()" type="button" class="btn btn-primary ml-3">Login</button>
+  </div>
 </div>
-<div class="form-group">
-<label for="pass">Password</label>
-<input type="password" class="form-control" id="lpass" placeholder="Jelszó">
-</div>
-<hr>
-<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-<button (click)="login()" sytle="margin-left: 10px;" type="button" class="btn btn-primary" data-bs-dismiss="modal">Login</button>
+

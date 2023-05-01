@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {ProductService} from "../../services/product.service";
 
 @Component({
   selector: 'app-dleftsidebar',
@@ -6,5 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dleftsidebar.component.css']
 })
 export class DleftsidebarComponent {
+  brands = this.productService.brands
+  categories = this.productService.categories
 
+  constructor(private productService: ProductService) {
+
+  }
 }

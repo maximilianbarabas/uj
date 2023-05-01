@@ -1,5 +1,7 @@
-import { Router } from '@angular/router';
-import { Component } from '@angular/core';
+import {Router} from '@angular/router';
+import {Component} from '@angular/core';
+
+declare var $: any
 
 @Component({
   selector: 'app-default',
@@ -7,17 +9,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./default.component.css']
 })
 export class DefaultComponent {
+  loginState = 'login'
 
-  constructor(private router:Router) {
-    if(localStorage.getItem('user'))
-    {
+  constructor(private router: Router) {
+    if (localStorage.getItem('user')) {
       this.router.navigateByUrl('admin/products');
-
     }
   }
 
-  ngOnInit(): void {
-
+  hide() {
+    $('#LoginModal').modal('hide');
   }
 
 }

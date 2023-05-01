@@ -1,302 +1,237 @@
 <div style="padding:2%;">
-    <div class="card card-primary card-outline">
-        <div class="card-header">
-          <h3 class="card-title" _msttexthash="437515" _msthash="129">Beérkezett üzenetek</h3>
+  <div class="card card-primary card-outline">
+    <div class="card-header">
+      <h3 class="card-title">Beérkezett üzenetek</h3>
 
-          <div class="card-tools">
-            <div class="input-group input-group-sm">
-              <input #inputForSearch (keyup)="search(inputForSearch.value)" type="text" class="form-control" placeholder="Search products" _mstplaceholder="148213" _msthash="130">
-              <div class="input-group-append">
-                <div class="btn btn-primary">
-                  <i class="fas fa-search"></i>
-                </div>
-              </div>
+      <div class="card-tools">
+        <div class="input-group input-group-sm">
+          <input #inputForSearch (keyup)="search(inputForSearch.value)" type="text" class="form-control"
+                 placeholder="Search products">
+          <div class="input-group-append">
+            <div class="btn btn-primary">
+              <i class="fas fa-search"></i>
             </div>
-          </div>
-          <!-- /.card-tools -->
-        </div>
-        <!-- /.card-header -->
-        <div class="card-body p-0">
-          <div class="mailbox-controls">
-            <button type="button" data-toggle="modal" data-target="#AddModal" class="btn btn-default btn-sm"><i class="fas fa-plus-circle"></i>Add new product</button>
-            <!-- Check all button -->
-            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-            </button>
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
-            </div>
-            <!-- /.btn-group -->
-            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
-            <div class="float-right"><font _mstmutation="1" _msttexthash="52949" _msthash="131">
-              1-50/200
-              </font><div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
-              </div>
-              <!-- /.btn-group -->
-            </div>
-            <!-- /.float-right -->
-          </div>
-          <div class="table-responsive mailbox-messages">
-            <table class="table table-hover table-striped">
-              <tbody>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Category</th>
-                    <th>Brand</th>
-                    <th>Price</th>
-                    <th>Description</th>
-                <th></th>
-
-                </tr>
-
-                <tr *ngFor= 'let p of products'>
-                    <td><img src="{{p.imgpath}}" style= "width: 50px; height: 50px;"></td>
-                    <td>{{p.name}}</td>
-                    <td>{{p.category}}</td>
-                    <td>{{p.brand}}</td>
-                    <td>{{p.price}}</td>
-                    <td>{{p.description |slice:0:20}}</td>
-                    <td><button type="button" class="btn btn-default btn-sm"><i (click)="SelectForDelete(p.id)" data-toggle="modal" data-target="#DeleteModal"class="fas fa-trash"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i (click)="selectForUpdate(p.id)" data-toggle="modal" data-target="#UpdateModal"class="fas fa-edit"></i></button>
-                        <button type="button" class="btn btn-default btn-sm"><i (click)="selectForShow(p.id)" data-toggle="modal" data-target="Show#Modal" class="fas fa-eye"></i></button>
-
-
-
-                    </td>
-                </tr>
-                    </tbody>
-                </table>
-            <!-- /.table -->
-          </div>
-          <!-- /.mail-box-messages -->
-        </div>
-        <!-- /.card-body -->
-        <div class="card-footer p-0">
-          <div class="mailbox-controls">
-            <!-- Check all button -->
-            <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
-            </button>
-            <div class="btn-group">
-              <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
-              <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
-            </div>
-            <!-- /.btn-group -->
-            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
-            <div class="float-right"><font _mstmutation="1" _msttexthash="52949" _msthash="177">
-              1-50/200
-              </font><div class="btn-group">
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
-                <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
-              </div>
-              <!-- /.btn-group -->
-            </div>
-            <!-- /.float-right -->
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="card-body p-0">
+      <div class="mailbox-controls">
+        <button (click)="openProductModal('#AddModal', 'add')" type="button" class="btn btn-default btn-sm"><i
+          class="fas fa-plus-circle"></i>Add new product
+        </button>
+        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+        </button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+        </div>
+        <button (click)="getAllProducts()" type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+        <div class="float-right">
+          1-50/200
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mailbox-messages">
+        <table class="table table-hover table-striped">
+          <tbody>
+          <tr>
+            <th>Image</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Brand</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+          <tr *ngFor='let product of products'>
+            <td>
+              <img src="{{product.imgpath}}" style="width: 50px; height: 50px;" alt="product image">
+            </td>
+            <td>{{product.name}}</td>
+            <td>{{product.category}}</td>
+            <td>{{product.brand}}</td>
+            <td>{{product.price}}</td>
+            <td>{{product.description |slice:0:20}}</td>
+            <td>
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#DeleteModal"><i
+                (click)="deleteProduct(product.id)"
+                class="fas fa-trash"></i></button>
+
+              <button type="button" class="btn btn-default btn-sm"><i
+                (click)="updateProduct(product)"
+                class="fas fa-edit"></i></button>
+
+              <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#ShowModal"><i
+                (click)="showProduct(product)" class="fas fa-eye"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer p-0">
+      <div class="mailbox-controls">
+        <button type="button" class="btn btn-default btn-sm checkbox-toggle"><i class="far fa-square"></i>
+        </button>
+        <div class="btn-group">
+          <button type="button" class="btn btn-default btn-sm"><i class="far fa-trash-alt"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-reply"></i></button>
+          <button type="button" class="btn btn-default btn-sm"><i class="fas fa-share"></i></button>
+        </div>
+        <button (click)="getAllProducts()" type="button" class="btn btn-default btn-sm"><i class="fas fa-sync-alt"></i></button>
+        <div class="float-right">1-50/200
+          <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-left"></i></button>
+            <button type="button" class="btn btn-default btn-sm"><i class="fas fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!--  Modal for add product -->
-  <div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fs-5" id="exampleModalLabel">Add Product</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            <div class ="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img class = "img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" src="./assets/1.png"alt=""></div>
-                    <div class="col-md-9">
+<div class="modal fade" id="AddModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5">{{isEdit ? 'Update' : 'Add' }} Product</h5>
+        <button (click)="hideProductModal('#AddModal')" type="button" class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productForm" (ngSubmit)="addProduct()">
+          <div class="container-fluid">
+            <div class="row">
+              <div class="col-md-3">
+                <img class="img-thumbnail" id="AddEmpImage" style="width: 100px; height: 100px;" src="./assets/1.png"
+                     alt=""></div>
+              <div class="col-md-9">
+                <input id="image" type="file" style="margin-left: 10px;" (change)="onSelect($event)" accept='image/*'>
+              </div>
 
-                        <input id="image" type="file" style="margin-left: 10p;" (change)= "onSelect($event)" accept='image/*'>
-
-                </div><br>
-                <label>Name : </label>
-                <div class="row"><input id="name" class="form-control"></div>
-                <div class="row">
-                    <div class="col"><select>
-                        <label>Category</label>
-                        <option value="Shirts">Mezek</option>
-                        <option value="Shoes">Cipők</option>
-                        <option value="Ball">Labda</option>
-                    </select></div>
-                    <div class="col">
-                    <label>Brands</label>
-                    <select class ="form-control" id="brand">
-                        <option value="Nike">Nike</option>
-                        <option value="Adidas">Adidas</option>
-                        <option value="Puma">Puma</option>
-                    </select>
+              <div class="col-md-12 mt-5">
+                <div class="form-group">
+                  <label for="name">Name</label>
+                  <input [disabled]="isDisable" type="text" formControlName="name" class="form-control" id="name"
+                         [class.is-invalid]="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)">
+                  <div
+                    *ngIf="productForm.controls['name'].invalid && (productForm.controls['name'].dirty || productForm.controls['name'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="productForm.controls['name'].errors?.['required']">
+                      Name is required.
                     </div>
-
-                    <label>Price</label>
-
-                    <div class="col"><input type="number" id="price" class="form-control"></div>
+                  </div>
                 </div>
-                <div class="row">
-                  <label>Description</label>
+              </div>
 
-                    <textarea id="description" class="form-control" style="height: 100px;">
-
-                    </textarea>
-                </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (Onclick)="add()">Add Product</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <!--  Modal for update product -->
-  <div class="modal fade" id="UpdateModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fs-5" id="exampleModalLabel">Update</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class ="container-fluid">
-                <div class="row">
-                    <div class="col-md-3">
-                        <img class = "img-thumbnail" id="UpdateImage" style="width: 50px; height: 50px;" src="./assets/1.png"alt=""></div>
-                    <div class="col-md-9">
-                      </div>
-                </div><br>
-                <label>Name : </label>
-                <div class="row"><input id="uname" class="form-control"></div>
-                <div class="row">
-                    <div class="col">
-                      <label>Category</label>
-                      <select class="form-control" id="uncategory">
-                          <option id="oldcategory" value="Edit"></option>
-                        <option value="Shoes">Cipők</option>
-                        <option value="Watch">Órák</option>
-                    </select></div>
-                    <div class="col">
-                      <label>Brands</label>
-                    <select class ="form-control" id="brand">
-                        <option id="oldbrand" value="Edit"></option>
-                        <option value="Adidas">Adidas</option>
-                        <option value="Nike.">Nike.</option>
-                    </select>
+              <div class="col-md-6 mt-2">
+                <div class="form-group">
+                  <label for="category">Category</label>
+                  <select [disabled]="isDisable" formControlName="category" class="form-control" id="category"
+                          [class.is-invalid]="productForm.controls['category'].invalid && (productForm.controls['category'].dirty || productForm.controls['category'].touched)">
+                    <option *ngFor="let category of categories" [value]="category.value">{{category.key}}</option>
+                  </select>
+                  <div
+                    *ngIf="productForm.controls['category'].invalid && (productForm.controls['category'].dirty || productForm.controls['category'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="productForm.controls['category'].errors?.['required']">
+                      Category is required.
                     </div>
-
-                    <div class="col">
-                    <label>Price</label>
-                    <input type="number" id="uprice" class="form-control"></div>
+                  </div>
                 </div>
-                <div class="row">
-                    <label>Description</label>
-                    <textarea id="udescription" class="form-control" style="height: 100px;">
+              </div>
 
-                    </textarea>
+              <div class="col-md-6 mt-2">
+                <div class="form-group">
+                  <label for="brand">Brand</label>
+                  <select [disabled]="isDisable" formControlName="brand" class="form-control" id="brand"
+                          [class.is-invalid]="productForm.controls['brand'].invalid && (productForm.controls['brand'].dirty || productForm.controls['brand'].touched)">
+                    <option *ngFor="let brand of brands" [value]="brand.value">{{brand.key}}</option>
+                  </select>
+                  <div
+                    *ngIf="productForm.controls['brand'].invalid && (productForm.controls['brand'].dirty || productForm.controls['brand'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="productForm.controls['brand'].errors?.['required']">
+                      Brand is required.
+                    </div>
+                  </div>
                 </div>
-        </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (Onclick)="update">update Product</button>
-        </div>
+              </div>
+
+              <div class="col-md-12 mt-2">
+                <div class="form-group">
+                  <label for="price">Price</label>
+                  <input [disabled]="isDisable" type="number" formControlName="price" class="form-control" id="price"
+                         [class.is-invalid]="productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)">
+                  <div
+                    *ngIf="productForm.controls['price'].invalid && (productForm.controls['price'].dirty || productForm.controls['price'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="productForm.controls['price'].errors?.['required']">
+                      Price is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="form-group">
+                  <label for="description">Description</label>
+                  <textarea [disabled]="isDisable" rows="5" cols="5" formControlName="description" class="form-control"
+                            id="description"
+                            [class.is-invalid]="productForm.controls['description'].invalid && (productForm.controls['description'].dirty || productForm.controls['description'].touched)">
+                  </textarea>
+                  <div
+                    *ngIf="productForm.controls['description'].invalid && (productForm.controls['description'].dirty || productForm.controls['description'].touched)"
+                    class="invalid-feedback">
+                    <div *ngIf="productForm.controls['description'].errors?.['required']">
+                      Description is required.
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal-footer mt-4">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"
+                        (click)="hideProductModal('#AddModal')">Cancel
+                </button>
+                <button *ngIf="!isDisable" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                        (click)="addProduct()">{{isEdit ? 'Update' : 'Add' }} Product
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>
+</div>
 
-  <!--  Modal for Delete product -->
-  <div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title fs-5" id="exampleModalLabel">Delete Product</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <h2>Are you sure you want delete this product?</h2>
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (Onclick)="deleteConform()">Delete Product</button>
-        </div>
+<!--  Modal for Delete product -->
+<div class="modal fade" id="DeleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title fs-5">Delete Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                (click)="hideProductModal('#DeleteModal')"></button>
+      </div>
+      <div class="modal-body">
+        <h2>Are you sure you want delete this product?</h2>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="hideProductModal('#DeleteModal')">Cancel</button>
+        <button type="button" class="btn btn-danger" (click)="confirmDelete()">Delete
+          Product
+        </button>
       </div>
     </div>
   </div>
-
-    <!--  Modal for show product -->
-    <div class="modal fade" id="ShowModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title fs-5" id="exampleModalLabel">Product Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-              <div class ="container-fluid">
-                  <div class="row">
-                      <div class="col-md-3">
-                          <img class = "img-thumbnail" id="ShowImage" style="width: 50px; height: 50px;" src="./assets/1.png"alt=""></div>
-                      <div class="col-md-9">
-                        </div>
-                  </div><br>
-                  <label>Name : </label>
-                  <div class="row"><input disabled id="sname" class="form-control"></div>
-                  <div class="row">
-                      <div class="col">
-
-                        <label>Category</label>
-                        <select disabled class="form-control" id="scategory">
-                            <option id="soldcategory" value="Show"></option>
-                          <option value="Shoes">Cipők</option>
-                          <option value="Watch">Órák</option>
-                          <option value="Watch">Órák</option>
-                          <option value="Watch">Órák</option>
-                          <option value="Watch">Órák</option>
-                          <option value="Watch">Órák</option>
-                          <option value="Watch">Órák</option>
-                      </select></div>
-                      <div class="col">
-
-                        <label>Brands</label>
-                      <select disabled class ="form-control" id="sbrand">
-                          <option id="oldbrand" value="Edit"></option>
-                          <option value="Adidas">Adidas</option>
-                          <option value="Nike.">Nike.</option>
-                          <option value="Puma.">Puma.</option>
-                          <option value="Kappa.">Kappa.</option>
-                      </select>
-                      </div>
-
-                      <div class="col">
-                      <label>Price</label>
-                      <input disabled type="number" id="sprice" class="form-control"></div>
-                  </div>
-                  <div class="row">
-                      <label>Description</label>
-                      <textarea disabled id="sdescription" class="form-control" style="height: 100px;">
-
-                      </textarea>
-                  </div>
-          </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Exit</button>
-
-          </div>
-        </div>
-      </div>
-    </div>
-
+</div>

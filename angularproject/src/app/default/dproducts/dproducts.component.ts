@@ -1,6 +1,6 @@
-import { ProductService } from './../../services/product.service';
-import { Component, OnInit } from '@angular/core';
-import { productModel } from 'src/app/models/product.model';
+import {ProductService} from './../../services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {productModel} from 'src/app/models/product.model';
 
 @Component({
   selector: 'app-dproducts',
@@ -8,19 +8,24 @@ import { productModel } from 'src/app/models/product.model';
   styleUrls: ['./dproducts.component.css']
 })
 export class DproductsComponent implements OnInit {
-  products!: productModel[]; 
+  products!: productModel[];
 
-  constructor(private proSer:ProductService) { }
+  constructor(private productService: ProductService) {
+  }
 
-  
+
   ngOnInit(): void {
-    this.proSer.AllProducts.subscribe(res=>{
-  
-      this.products=res
-    console.log(this.products);
-    
+    this.getAllProducts()
+  }
+
+  getAllProducts() {
+    this.productService.AllProducts.subscribe(res => {
+      this.products = res
     });
 
-    }
+    //start TODO: dummy data to be removed when linked with proper databases
+    this.products = this.productService.getProducts()
+    // end
+  }
 
 }

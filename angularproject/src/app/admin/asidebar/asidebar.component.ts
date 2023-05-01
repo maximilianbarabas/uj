@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-asidebar',
@@ -7,17 +7,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./asidebar.component.css']
 })
 export class AsidebarComponent {
-  constructor(private router:Router) {}
-
-  ngOnInit(): void{
-
+  constructor(private router: Router) {
   }
 
-  logout()
-{
-  localStorage.removeItem("user");
-  this.router.navigateByUrl('/');
-}
-
-
+  logout() {
+    localStorage.removeItem("user");
+    this.router.navigateByUrl('/');
+  }
 }

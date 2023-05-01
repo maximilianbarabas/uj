@@ -1,6 +1,7 @@
-import { productModel } from './../../models/product.model';
-import { ProductService } from 'src/app/services/product.service';
-import { Component, OnInit } from '@angular/core';
+import {productModel} from '../../models/product.model';
+import {ProductService} from 'src/app/services/product.service';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, UntypedFormGroup, Validators} from "@angular/forms";
 
 declare var $: any
 declare var toastr: any;
@@ -12,141 +13,183 @@ declare var Toast: any;
   styleUrls: ['./products.component.css']
 })
 export class ProductsComponent implements OnInit {
-products!: productModel[]; 
-// For Image 
-SelectedImage:File=null as any;
-tempID="";
+  productForm!: UntypedFormGroup
 
+  products!: productModel[];
+  SelectedImage: File = null as any;
+  tempID = "";
+  isEdit = false
+  isDisable = false
 
-  constructor(private proser:ProductService) {
+  categories = this.productService.categories
 
+  brands = this.productService.brands
+
+  constructor(private productService: ProductService, private _formBuilder: FormBuilder) {
+    this.productForm = this._formBuilder.group({
+      name: [{value: null, disabled: false}, Validators.required],
+      category: [{value: null, disabled: false}, Validators.required],
+      description: [{value: null, disabled: false}, Validators.required],
+      brand: [{value: null, disabled: false}, Validators.required],
+      price: [{value: null, disabled: false}, Validators.required],
+    });
   }
 
   ngOnInit(): void {
-this.proser.AllProducts.subscribe(res=>{
-  
-  this.products=res
-console.log(this.products);
-
-});
-
+    this.getAllProducts()
   }
 
-  search(input: any)
-  {
-    this.proser.getFromDb(input);
-  }
-
-  onSelect(event: any)
-  {
-    var tmppath = URL.createObjectURL(event.target.files[0]);
-    $("#AddEmpImage").fadeIn("fast").attr('src',tmppath);
-    this.SelectedImage=<File>event.target.files[0];
-  }
-
-add() {
-  var message;
-const fd=new FormData();
-fd.append('image',this.SelectedImage);
-fd.append('name',$("#name").vall());
-fd.append('category',$("#category").val());
-fd.append('brand',$("#brand").val());
-fd.append('price',$("#price").val());
-fd.append('description',$("#description").val());
-    this.proser.add(fd).subscribe (
-      res=>{
-        message=res;
-        Toast.fire({
-          type:"success",
-          title:message});
-          this.proser.getFromDb("");
-        },
-    error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
+  getAllProducts() {
+    this.productService.AllProducts.subscribe(res => {
+      this.products = res
     });
 
-
+    //start TODO: dummy data to be removed when linked with proper databases
+    this.products = this.productService.getProducts()
+    // end
   }
-  selectForUpdate(id: any)
-  {
-    this.tempID=(id)
-    this.products.forEach(el=> {
-      if(id==el.id)
-      {
-        $("#uname").prop("value",el.name)
-        $("#oldcategory").prop("value",el.category)
-        $("#oldcategory").html(el.category)
-        $("#oldbrand").prop("value",el.brand)
-        $("#oldbrand").html("value",el.brand)
-        $("#price").prop("value",el.price)
-        $("#description").prop("value",el.description)
-        $("#UpdateImage").fadeIn("fast").attr('src',el.imgpath);
-      }
-    })
+
+  search(input: any) {
+
+    if (input === '') {
+      this.getAllProducts()
+      return
     }
 
-    selectForShow(id:any)
-    {
-      this.tempID=(id)
-      this.products.forEach(el=> {
-        if(id==el.id)
-        {
-          $("#sname").prop("value",el.name)
-          $("#sodcategory").html(el.category)
-          $("#soldcategory").prop("value",el.category)
-          $("#soldbrand").html("value",el.brand)
-          $("#soldbrand").prop("value",el.brand)
-          $("#sprice").prop("value",el.price)
-          $("#sdescription").prop("value",el.description)
-          $("#ShowImage").fadeIn("fast").attr('src',el.imgpath);
-
-        }
-      })
-  
-  
-  }
-  update()
-  {
-    var message;
-    const fd=new FormData();
-    fd.append('id',this.tempID);
-    fd.append('name',$("#uname").vall());
-    fd.append('category',$("#ucategory").val());
-    fd.append('brand',$("#ubrand").val());
-    fd.append('price',$("#uprice").val());
-    fd.append('description',$("#udescription").val());
-        this.proser.update(fd).subscribe (
-          res=>{
-            message=res;
-            Toast.fire({
-              type:"success",
-              title:message});
-              this.proser.getFromDb("");
-            },
-        error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
-        });
-  }
-  SelectForDelete(id: any)
-  {
-    this.tempID=id;
-  }
-  deleteConform()
-  {
-    var message;
-    this.proser.delete(this.tempID).subscribe (
-      res=>{
-        message=res;
-        Toast.fire({
-          type:"success",
-          title:message});
-          this.proser.getFromDb("");
-        },
-    error =>{error.error.error.forEach((element: any)=>{toastr.error("Error", element); });
+    const searchText = input.toLowerCase()
+    this.products = this.products.filter(product => {
+      const productName = product.name.toLowerCase()
+      return productName.includes(searchText)
     });
 
+    this.productService.getFromDb(input);
   }
 
-}
-function selectForShow(id: any, any: any) {
-  throw new Error('Function not implemented.');
-}
+  addProduct() {
+    const isValid = this.productForm.valid
+    if (!isValid) {
+      this.productService.gettingErrorsForm(this.productForm)
+      return
+    }
 
+    const formValue = this.productForm.getRawValue()
+    formValue.image = this.SelectedImage || './assets/1.png'
+
+    if (!this.isEdit) {
+      this.productService.add(formValue).subscribe((response) => {
+        if (response) {
+          Toast.fire({
+            type: "success",
+            title: response
+          });
+          this.productService.getFromDb("");
+          this.productForm.reset()
+          this.hideProductModal('#AddModal')
+        }
+      }, error => {
+        toastr.error("Error", error.message)
+        this.hideProductModal('#AddModal')
+      })
+
+
+      //start TODO: dummy data to be removed when linked with proper databses
+      this.productService.sampleProducts.push(formValue)
+      this.hideProductModal('#AddModal')
+      // end TODO
+
+    } else {
+      formValue.id = this.tempID
+      this.productService.update(formValue).subscribe((response) => {
+        if (response) {
+          Toast.fire({
+            type: "success",
+            title: response
+          });
+          this.productService.getFromDb("");
+          this.isEdit = false
+          this.productForm.reset()
+          this.hideProductModal('#AddModal')
+        }
+      }, error => {
+        this.isEdit = true
+        toastr.error("Error", error.message)
+        this.hideProductModal('#AddModal')
+      })
+
+      //start TODO: dummy data to be removed when linked with proper databases
+      this.products = this.products.map(product => product.id !== this.tempID ? product : formValue)
+      this.hideProductModal('#AddModal')
+      // end TODO
+    }
+  }
+
+  showProduct(product: productModel) {
+    this.productForm.patchValue(product)
+    this.openProductModal('#AddModal', 'disable')
+  }
+
+  updateProduct(product: productModel) {
+    this.tempID = product.id
+    this.productForm.patchValue(product)
+    this.openProductModal('#AddModal', 'edit')
+  }
+
+  deleteProduct(id: any) {
+    this.tempID = id;
+  }
+
+  confirmDelete() {
+    this.productService.delete(this.tempID).subscribe(
+      res => {
+        Toast.fire({
+          type: "success",
+          title: res
+        });
+        this.hideProductModal('#DeleteModal')
+        this.productService.getFromDb("");
+      },
+      error => {
+        toastr.error("Error", error.message);
+      });
+
+
+    //start TODO: dummy data to be removed when linked with proper databases
+    const subjectTemp = this.products.findIndex((product) => product.id === this.tempID)
+    this.products.splice(subjectTemp, 1)
+    this.hideProductModal('#DeleteModal')
+    // end
+  }
+
+  openProductModal(value: string, mode: string) {
+    if (mode === 'add') {
+      this.isEdit = this.isDisable = false
+      this.productForm.reset()
+      this.productForm.enable()
+    }
+    if (mode === 'edit') {
+      this.productForm.enable()
+      this.isEdit = true
+      this.isDisable = false
+    }
+    if (mode === 'disable') {
+      this.productForm.disable()
+      this.isDisable = true
+    }
+
+    $(value).modal('show');
+  }
+
+  hideProductModal(value: string) {
+    this.tempID = ''
+    this.isEdit = this.isDisable = false
+    this.productForm.reset()
+
+    $(value).modal('hide');
+  }
+
+  onSelect(event: any) {
+    let tempPath = URL.createObjectURL(event.target.files[0]);
+    $("#AddEmpImage").fadeIn("fast").attr('src', tempPath);
+    this.SelectedImage = <File>event.target.files[0];
+  }
+}

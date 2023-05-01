@@ -1,19 +1,17 @@
-<nav class = "navbar navbar-expand-lg navbar-light bg-dark" style="width:100vw;">
-    <a class = "navbar-brand" href="#">Hallhatatlanok</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupported">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+  <a class="navbar-brand" href="#">Hallhatatlanok</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupported">
+    <span class="navbar-toggler-icon"></span>
+  </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item"><a style="color:white;" class="nav-link" [routerLink]="['/']">Homepage</a></li>
-                <li class="nav-item"><a style="color:white;" class="nav-link" [routerLink]="['/about']">About</a></li>
-                <li class="nav-item"><a style="color:white;" class="nav-link" [routerLink]="['/contactus']">Contact Us</a></li>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/']">Homepage</a></li>
+      <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/about']">About</a></li>
+      <li class="nav-item"><a class="nav-link text-white" [routerLink]="['/contactus']">Contact Us</a></li>
 
 
-        </ul>
-
-        <a class="nav-link" [routerLink]="['/']">Register</a>"
-           <a data-toggle="modal" data-target="#LoginModal" class="nav-link" [routerLink]="['/']">Login</a>"
-    </div>
+    </ul>
+    <a data-toggle="modal" data-target="#LoginModal" class="nav-link" [routerLink]="['/']">Login</a>
+  </div>
 </nav>
