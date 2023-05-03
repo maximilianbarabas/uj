@@ -2,22 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\product;
+use App\Models\product;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    //
+    public function index()
+    {
+        return product::all();
+    }
+
     public function add(Request $request) 
+
+
     {
         $validator=Validator::make($request-all(),[
             'name'=>'required',
             'category'=>'required',
             'brand'=>'required',
             'description'=>'required',
-            'image'=>'required|image',
+            'image',
             'price'=>'required', 
         ]);
         if($validator->fails())
@@ -32,7 +38,7 @@ class ProductController extends Controller
         $p->price=$request->image;
         $p->save();
                 // storage image
-                $url="http://localhost:800/storage/";
+                $url="http://localhost:8000/storage/";
                 $file = $request->file( key: 'image');
                 $extension = $file ->getClientOriginalExtension();
                 $path = $request->file( key: 'image')->storeAs(path: 'proimages/', name: $p->id. '.'.$extension);
@@ -49,6 +55,7 @@ class ProductController extends Controller
             'category'=>'required',
             'brand'=>'required',
             'description'=>'required',
+            'image',
             'price'=>'required',
             'id'=>'required',
         ]);
@@ -68,23 +75,13 @@ class ProductController extends Controller
 
 
     }
-        public function delete(Request $request) 
+        public function destroy($id) 
         {
-            $validator=Validator::make($request->all(),[
-                'id'=>'required',
-            ]);
-            if($validator->fails())
-            {
-                return response()->json(['error'=>$validator->errors()->all()], status: 409);
-            }
-            $p=product::find($request->id)->delete();
-                Storage::disk('public')->delete($p->image);
 
-                $p->delete();
+                return Product::destroy($id);
 
-                
-            return response()->json(['message'=>"Product Successfully Deleted"]);
         }
+
 
         public function show(Request $request)
         {
